@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'list_view.dart';
+
 
 class LogPage extends StatefulWidget {
   @override
@@ -13,7 +15,8 @@ class _LogPageState extends State<LogPage> {
   }
 
   AnnotatedRegion<SystemUiOverlayStyle> buildAnnotatedRegion() {
-    return AnnotatedRegion<SystemUiOverlayStyle>(value: SystemUiOverlayStyle.light, child: buildGestureDetector());
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+        value: SystemUiOverlayStyle.light, child: buildGestureDetector());
   }
 
   GestureDetector buildGestureDetector() {
@@ -25,17 +28,19 @@ class _LogPageState extends State<LogPage> {
   }
 
   Column buildColumnmain() {
-    return Column(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
-      buildContainertext(),
-      SizedBox(height: 20),
-      buildEmail(),
-      SizedBox(height: 20),
-      buildPassword(),
-      SizedBox(height: 40),
-      buildLogButton(),
-      SizedBox(height: 10),
-      buildSignup(),
-    ]);
+    return Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          buildContainertext(),
+          SizedBox(height: 20),
+          buildEmail(),
+          SizedBox(height: 20),
+          buildPassword(),
+          SizedBox(height: 40),
+          buildLogButton(),
+          SizedBox(height: 10),
+          buildSignup(),
+        ]);
   }
 
   Container buildContainer() {
@@ -43,12 +48,15 @@ class _LogPageState extends State<LogPage> {
         height: double.infinity,
         width: double.infinity,
         decoration: BoxDecoration(
-          gradient: LinearGradient(begin: Alignment.topCenter, end: Alignment.bottomCenter, colors: [
-            Color(0xFF6100ed),
-            Color(0xBf6100ed),
-            Color(0x996100ed),
-            Color(0x666100ed),
-          ]),
+          gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Color(0xFF6100ed),
+                Color(0xBf6100ed),
+                Color(0x996100ed),
+                Color(0x666100ed),
+              ]),
         ),
         child: SingleChildScrollView(
             padding: EdgeInsets.symmetric(
@@ -122,7 +130,10 @@ class _LogPageState extends State<LogPage> {
       width: double.infinity,
       child: RaisedButton(
         elevation: 5,
-        onPressed: () => print(' LOGIN'),
+        onPressed: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => ListViewPage()));
+        },
         padding: EdgeInsets.all(15),
         color: Colors.white,
         child: Text(
@@ -163,15 +174,22 @@ class _LogPageState extends State<LogPage> {
     return Container(
       width: 140,
       height: 120,
-      child: Text('V', style: TextStyle(color: Color(0xBf6100ed), fontSize: 100, fontWeight: FontWeight.bold)),
+      child: Text('V',
+          style: TextStyle(
+              color: Color(0xBf6100ed),
+              fontSize: 100,
+              fontWeight: FontWeight.bold)),
       alignment: Alignment.center,
-      decoration: BoxDecoration(shape: BoxShape.circle, color: Colors.white, boxShadow: [
-        BoxShadow(
+      decoration: BoxDecoration(
+          shape: BoxShape.circle,
           color: Colors.white,
-          blurRadius: 5.0,
-          spreadRadius: 2.0,
-        ),
-      ]),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.white,
+              blurRadius: 5.0,
+              spreadRadius: 2.0,
+            ),
+          ]),
     );
   }
 }
