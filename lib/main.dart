@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
-import 'list_view.dart';
-import 'logın_page.dart';
+import 'week1/list_view.dart';
+import 'week1/logın_page.dart';
+import 'week2/page_design/second_logın_page.dart';
+import 'week2_http/http_request/http_hello.dart';
+import 'week2_http/http_request/jsan_placeholder_view.dart';
+import 'week2_google_package/package.dart';
 
 void main() => runApp(MyApp());
 
@@ -9,7 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Material App',
-      home: LogPage(),
+      home: PackagesDesign(),
       // ListViewPage(),
     );
   }
