@@ -6,6 +6,8 @@ import 'week2_http/http_request/http_hello.dart';
 import 'week2_http/http_request/jsan_placeholder_view.dart';
 import 'week2_google_package/package.dart';
 import 'week3/todolist.dart';
+import 'week3/jsonholder.dart';
+
 
 void main() => runApp(MyApp());
 

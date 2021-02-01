@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'list_view.dart';
 
-
 class LogPage extends StatefulWidget {
   @override
   _LogPageState createState() => _LogPageState();
@@ -126,7 +125,7 @@ class _LogPageState extends State<LogPage> {
 
   Widget buildLogButton() {
     return Container(
-     padding: EdgeInsets.all(50.0),
+      padding: EdgeInsets.all(50.0),
       width: double.infinity,
       child: RaisedButton(
         elevation: 5,

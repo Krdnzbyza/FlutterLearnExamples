@@ -16,7 +16,7 @@ class _JsonPlaceHolderState extends State<JsonPlaceHolder> {
 
   Future<PostData> getJsonPlaceHolderDatas() async {
     final _response =
-        await http.get("https://jsonplaceholder.typicode.com/albums/2");
+        await http.get("https://jsonplaceholder.typicode.com/albums");
     if (_response.statusCode == 400) {
       return null;
     }
@@ -26,20 +26,50 @@ class _JsonPlaceHolderState extends State<JsonPlaceHolder> {
     return post;
   }
 
+  Future<List<PostData>> getJsonPlaceHolderDatasList() async {
+    final _response =
+        await http.get("https://jsonplaceholder.typicode.com/albums/");
+    if (_response.statusCode == 400) {
+      return null;
+    }
+
+    final _mapJson = json.decode(_response.body);
+    if (_mapJson is List) {
+      return _mapJson.map((json) => PostData.fromJson(json)).toList();
+    } else {
+      throw Exception("List Gelmedi");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-          alignment: Alignment.center, child: _placeHolderDatasWidget),
+          alignment: Alignment.center, child: _placeHolderDatasWidgetList),
     );
   }
 
-  Widget get _placeHolderDatasWidget => FutureBuilder<PostData>(
-        future: getJsonPlaceHolderDatas(),
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
+  // Widget get _placeHolderDatasWidget => FutureBuilder<PostData>(
+  //       future: getJsonPlaceHolderDatas(),
+  //       builder: (BuildContext context, AsyncSnapshot snapshot) {
+  //         if (snapshot.hasData) {
+  //           return ListTile(
+  //             title: Text(snapshot.data.title),
+  //           );
+  //         } else {
+  //           return Center(child: CircularProgressIndicator());
+  //         }
+  //       },
+  //     );
+
+  Widget get _placeHolderDatasWidgetList => FutureBuilder<List<PostData>>(
+        future: getJsonPlaceHolderDatasList(),
+        builder: (BuildContext context, snapshot) {
           if (snapshot.hasData) {
-            return ListTile(
-              title: Text(snapshot.data.title),
+            return ListView.builder(
+              itemBuilder: (context, index) => ListTile(
+                title: Text(snapshot.data[index].title),
+              ),
             );
           } else {
             return Center(child: CircularProgressIndicator());
