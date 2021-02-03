@@ -1,3 +1,4 @@
+import 'package:design/vb/todo/model/todo_model.dart';
 import 'package:flutter/material.dart';
 
 import '../constant/image_constant.dart';
@@ -11,6 +12,12 @@ class TodoView extends TodoViewModel with PaddingDtas {
   ThemeData theme(BuildContext context) => Theme.of(context);
 
   @override
+  void initState() {
+    super.initState();
+    fetchTodoItems();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildAppBar(context),
@@ -20,7 +27,7 @@ class TodoView extends TodoViewModel with PaddingDtas {
           children: [
             Expanded(flex: 2, child: HeaderCard(image: ImagesConstants().cc1, decripiton: "Categoreis", title: "50+")),
             Spacer(flex: 1),
-            Expanded(flex: 9, child: buildListView()),
+            Expanded(flex: 9, child: isLoading ? Center(child: CircularProgressIndicator()) : buildListView()),
           ],
         ),
       ),
@@ -41,22 +48,23 @@ class TodoView extends TodoViewModel with PaddingDtas {
 
   ListView buildListView() {
     return ListView.builder(
-        // TODO: CREATE ATOMIC TODO TASK
-        itemBuilder: (context, index) => buildPaddingCard());
+      itemCount: todoItems.length,
+      itemBuilder: (context, index) => buildPaddingCard(todoItems[index]),
+    );
   }
 
-  Padding buildPaddingCard() {
+  Padding buildPaddingCard(TodoModel todo) {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 10),
       child: Card(
           child: ListTile(
-        leading: CircularProgressIndicator(
-          value: 1,
-          strokeWidth: 5,
+        leading: CircularProgressIndicator(value: 1, strokeWidth: 5),
+        trailing: Icon(
+          todo.completed ? Icons.check : Icons.drag_indicator,
+          color: todo.completed ? Colors.green : Colors.grey,
         ),
-        trailing: Icon(Icons.drag_indicator),
-        title: Text("Hello"),
-        subtitle: Text('data'),
+        title: Text(todo.title),
+        subtitle: Text(todo.userId.toString()),
       )),
     );
   }
