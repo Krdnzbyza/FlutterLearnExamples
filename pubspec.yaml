@@ -32,6 +32,7 @@ dependencies:
   adobe_xd: ^1.0.0+1
   google_nav_bar: ^3.2.0
   line_awesome_icons: ^1.0.4+2
+  pedantic: ^1.9.2
 
 dev_dependencies:
   flutter_test:
