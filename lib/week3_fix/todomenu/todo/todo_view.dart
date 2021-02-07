@@ -1,3 +1,5 @@
+import 'package:design/week3_fix/model/todo_model.dart';
+
 import '../../widget/list_card.dart';
 import 'package:flutter/material.dart';
 import 'todo_view_model.dart';
@@ -5,16 +7,22 @@ import 'todo_view_model.dart';
 class TodoView extends TodoViewModel with PaddingDtas {
   final _colorsBlack = Color(0xff24242d);
   final bool _isLoading = false;
+
+  @override
+  void initState() {
+    super.initState();
+    fetchTodoItems();
+  }
+
   @override
   Widget build(BuildContext context) {
-    // Replace this with your build function
     return Scaffold(
         appBar: buildAppBar(context),
         body: Padding(
             padding: _paddingHorizontal1x,
             child: _isLoading
                 ? Center(child: CircularProgressIndicator())
-                : ListCard()));
+                : ListCard(todoItems: todoItems)));
   }
 
   AppBar buildAppBar(BuildContext context) {

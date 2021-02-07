@@ -1,7 +1,10 @@
-import 'package:design/week3_fix/model/todo_model.dart';
 import 'package:flutter/material.dart';
+import '../model/todo_model.dart';
 
 class ListCard extends StatefulWidget {
+  final List<TodoModel> todoItems;
+
+  const ListCard({Key key, this.todoItems}) : super(key: key);
   @override
   _ListCardState createState() => _ListCardState();
 }
@@ -9,12 +12,13 @@ class ListCard extends StatefulWidget {
 class _ListCardState extends State<ListCard> {
   final String _userAvatarUrl =
       'https://images.unsplash.com/photo-1565898835704-3d6be4a2c98c?fit=crop&w=200&q=60';
-  final List<TodoModel> _todoItems = [];
+  final List<TodoModel> todoItems = [];
+
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: _todoItems.length,
-      itemBuilder: (context, index) => buildCard(_todoItems[index]),
+      itemCount: widget.todoItems.length,
+      itemBuilder: (context, index) => buildCard(widget.todoItems[index]),
     );
   }
 

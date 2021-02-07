@@ -34,14 +34,14 @@ class TodoModel {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
-    data['name'] = this.name;
-    data['username'] = this.username;
+    data['name'] = name;
+    data['username'] = username;
     data['email'] = this.email;
-    if (this.address != null) {
-      data['address'] = this.address.toJson();
+    if (address != null) {
+      data['address'] = address.toJson();
     }
     data['phone'] = this.phone;
-    data['website'] = this.website;
+    data['website'] = website;
     if (this.company != null) {
       data['company'] = this.company.toJson();
     }
