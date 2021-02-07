@@ -23,15 +23,11 @@ abstract class TodoViewModel extends State<Todo> {
 
     if (response.statusCode == HttpStatus.ok) {
       final jsonBody = jsonDecode(response.body);
-
-      if (response.statusCode == HttpStatus.ok) {
-        final jsonBody = jsonDecode(response.body);
-        if (jsonBody is List) {
-          todoItems = jsonBody.map((e) => TodoModel.fromJson(e)).toList();
-        }
+      if (jsonBody is List) {
+        todoItems = jsonBody.map((e) => TodoModel.fromJson(e)).toList();
       }
-      changleLoading();
     }
+    changleLoading();
   }
 }
 

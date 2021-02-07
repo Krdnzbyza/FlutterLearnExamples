@@ -5,16 +5,20 @@ import 'todo_view_model.dart';
 class TodoView extends TodoViewModel with PaddingDtas {
   final _colorsBlack = Color(0xff24242d);
   final bool _isLoading = false;
+
+  @override
+  void initState() {
+    super.initState();
+    fetchTodoItems();
+  }
+
   @override
   Widget build(BuildContext context) {
     // Replace this with your build function
     return Scaffold(
         appBar: buildAppBar(context),
-        body: Padding(
-            padding: _paddingHorizontal1x,
-            child: _isLoading
-                ? Center(child: CircularProgressIndicator())
-                : ListCard()));
+        body:
+            Padding(padding: _paddingHorizontal1x, child: _isLoading ? Center(child: CircularProgressIndicator()) : ListCard(todoItems: todoItems)));
   }
 
   AppBar buildAppBar(BuildContext context) {
